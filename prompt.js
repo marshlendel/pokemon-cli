@@ -4,16 +4,21 @@ import saveData from "./saveData.js";
 
 const fetchData = async (userPrompts) => {
   const { name, options } = userPrompts;
-  try {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
-    const data = await res.json();
-    saveData(data, options);
-  } catch (err) {
-    if (err instanceof SyntaxError) {
-      console.error(`${name} isn't a recognized pokemon!`);
-    } else {
-      console.error(err);
-    }
+  if (name.trim().length) {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`)
+      .then((res) => res.json())
+      .then((data) => saveData(data, options))
+      .then(() => searchAgain())
+      .catch((err) => {
+        if (err instanceof SyntaxError) {
+          console.error(`${name} isn't a recognized pokemon!`);
+          searchAgain();
+        } else {
+          console.error(err);
+        }
+      });
+  } else {
+    console.log("You didn't enter a Pokémon!");
   }
 };
 
@@ -34,4 +39,19 @@ const promptUser = async () => {
   fetchData(answers);
 };
 
-export default promptUser
+const searchAgain = async () => {
+  let { answer } = await inquirer.prompt({
+    type: "list",
+    name: "answer",
+    message: "Search another Pokémon?",
+    choices: ["Yes", "No"],
+  });
+  let again = answer === "Yes" ? true : false;
+  if (again) {
+    promptUser();
+  } else {
+    return;
+  }
+};
+
+export { promptUser };

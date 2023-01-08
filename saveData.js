@@ -1,6 +1,5 @@
 import fs from "fs/promises";
 import fetch from "node-fetch";
-import path from "path";
 
 const saveData = async (data, options) => {
   if (options.length) {
@@ -15,8 +14,8 @@ const saveData = async (data, options) => {
       });
     }
     if (options.includes("Artwork")) {
-        const url = data.sprites.other["official-artwork"].front_default
-        downloadPicture(data.name, 'original-artwork', url)
+      const url = data.sprites.other["official-artwork"].front_default;
+      downloadPicture(data.name, "original-artwork", url);
     }
   } else {
     console.log("You didn't select anything to download!");
