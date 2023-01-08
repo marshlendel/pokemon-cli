@@ -43,13 +43,11 @@ const promptUser = async () => {
 
 const searchAgain = async () => {
   let { answer } = await inquirer.prompt({
-    type: "list",
+    type: "confirm",
     name: "answer",
-    message: "Search another Pokémon?",
-    choices: ["Yes", "No"],
+    message: "Search another Pokémon?"
   });
-  let again = answer === "Yes" ? true : false;
-  if (again) {
+  if (answer) {
     promptUser();
   } else {
     return;
