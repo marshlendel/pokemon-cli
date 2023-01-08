@@ -7,8 +7,9 @@ const fetchData = async (userPrompts) => {
   if (name.trim().length) {
     fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`)
       .then((res) => res.json())
-      .then((data) => saveData(data, options))
-      .then(() => searchAgain())
+      .then((data) => {
+        saveData(data, options).then(() => searchAgain());
+      })
       .catch((err) => {
         if (err instanceof SyntaxError) {
           console.error(`${name} isn't a recognized pokemon!`);
@@ -19,6 +20,8 @@ const fetchData = async (userPrompts) => {
       });
   } else {
     console.log("You didn't enter a Pokémon!");
+    searchAgain(
+    )
   }
 };
 
@@ -54,4 +57,4 @@ const searchAgain = async () => {
   }
 };
 
-export { promptUser };
+export { promptUser, searchAgain};

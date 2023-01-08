@@ -5,17 +5,17 @@ const saveData = async (data, options) => {
   if (options.length) {
     if (options.includes("Stats")) {
       const stats = getStats(data);
-      downloadStats(data.name, stats);
+      await downloadStats(data.name, stats);
     }
     if (options.includes("Sprites")) {
       const sprites = getSprites(data);
       sprites.forEach(([spriteName, url]) => {
-        downloadPicture(data.name, spriteName, url);
+        return downloadPicture(data.name, spriteName, url);
       });
     }
     if (options.includes("Artwork")) {
       const url = data.sprites.other["official-artwork"].front_default;
-      downloadPicture(data.name, "original-artwork", url);
+      await downloadPicture(data.name, "original-artwork", url);
     }
   } else {
     console.log("You didn't select anything to download!");
