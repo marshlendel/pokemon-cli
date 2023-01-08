@@ -1,3 +1,3 @@
 import promptUser from "./prompt.js";
-//==========POKEMON CLI DOWNLOADER==========
+console.log('==========POKEMON CLI DOWNLOADER==========')
 promptUser()
