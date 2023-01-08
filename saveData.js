@@ -15,7 +15,8 @@ const saveData = async (data, options) => {
       });
     }
     if (options.includes("Artwork")) {
-      console.log("download artwork!");
+        const url = data.sprites.other["official-artwork"].front_default
+        downloadPicture(data.name, 'original-artwork', url)
     }
   } else {
     console.log("You didn't select anything to download!");

@@ -5,7 +5,7 @@ import saveData from "./saveData.js";
 const fetchData = async (userPrompts) => {
   const { name, options } = userPrompts;
   try {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
     const data = await res.json();
     saveData(data, options);
   } catch (err) {
