@@ -20,8 +20,7 @@ const fetchData = async (userPrompts) => {
       });
   } else {
     console.log("You didn't enter a Pokémon!");
-    searchAgain(
-    )
+    searchAgain();
   }
 };
 
@@ -57,4 +56,4 @@ const searchAgain = async () => {
   }
 };
 
-export { promptUser, searchAgain};
+export { promptUser };
